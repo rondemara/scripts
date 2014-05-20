@@ -1,4 +1,4 @@
-scripts
+Scripts
 =======
 
-some useful scripts
+Collection of some useful scripts.
