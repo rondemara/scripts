@@ -16,7 +16,7 @@ server_dir = ~/builds             #Default location of tarball on server.
 #--------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------
 if [ "$1" ==  "" ]; then
-   #Try pulling today's latest dev build, by default
+   #Try pulling latest... Specify default options below:
    server_dir=$server_dir
    tarball=$server_dir/$prefix.tgz
 else
