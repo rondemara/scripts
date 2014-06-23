@@ -1,7 +1,10 @@
 #!/bin/bash
 
-#read -s -p "Enter Password: " password
-password=`zenity --password --title "Enter Encryption Password:"`
-encrypted_pass=$password
-7z e -p$encrypted_pass $1
+if [ -t 0 ] ; then  
+   read -s -p "Enter Password: " password
+else
+   password=`zenity --password --title "Enter Password:"`
+fi
+
+7z e -p$password $1
 
