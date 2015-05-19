@@ -1,0 +1,38 @@
+# Colors declaration
+
+FOREG='#FF797979'
+FGM='#FFAE2841'
+WIRE='#FF424242'
+BATTERY='#FF2A4649'
+THECOLOR='#FF3F4B9C'
+BLUE='#FFAA9A4B'
+YELLOW='#FFBABE3F'
+
+. panel_colors
+
+# Info used in bar
+# Icons declarations
+
+i_pkgs='\ue14d'   # pacman
+i_mail='\ue072'   # mail icon
+i_wifi='\ue0f0'   # signal
+i_time='\ue016'   # clock
+i_load='\ue0c5'   # micro chip
+i_musk='\ue04d '  # headphones
+i_alsa='\ue05d'   # speaker
+i_tmp='\ue0cf'    # thermometer 
+i_term='\ue01e'   # term
+i_monitor='\ue09f' # monitor 
+i_ecrcl='\ue0f6'
+i_fcrcl='\ue098'
+
+# Call those motherfuckers icons
+SOUNDIC=`echo -e $i_alsa`
+MEMIC=`echo -e $i_load `
+MUSIC=`echo -e $i_musk`
+TEMPIC=`echo -e $i_tmp`
+PACIC=`echo -e $i_pkgs`
+CLKIC=`echo -e $i_time`
+TERMIC=`echo -e $i_term`
+FCRCL=`echo -e $i_fcrcl`
+ECRCL=`echo -e $i_ecrcl`

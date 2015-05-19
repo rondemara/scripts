@@ -1,0 +1,11 @@
+#!/bin/sh
+
+#PANEL_FONT_FAMILY="-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-1"
+#PANEL_FONT_FAMILY="-xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso10646-1"
+
+PANEL_FONT_FAMILY='-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-1'
+PANEL_FONT_2='-misc-stlarch-medium-r-normal--10-100-75-75-c-80-iso10646-1'
+
+
+/home/demarr/.config/bspwm/barmk | bar -p -f $PANEL_FONT_2,$PANEL_FONT_FAMILY | while read line; do eval "$line"; done
+
