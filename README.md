@@ -1,4 +1,4 @@
 Scripts
 =======
 
-Collection of some useful scripts.
+Collection of some scripts and configuration files.
