@@ -1,15 +1,15 @@
 #!/bin/bash
 
 # This loop will fill a buffer with our infos, and output it to stdout.
-i_pkgs='\ue14d'   # pacman
-i_mail='\ue072'   # mail icon
-i_wifi='\ue0f0'   # signal
-i_time='\ue016'   # clock
-i_load='\ue0c5'   # micro chip
-i_musk='\ue04d '  # headphones
-i_alsa='\ue05d'   # speaker
-i_tmp='\ue0cf'    # thermometer 
-i_term='\ue01e'   # term
+i_pkgs='\ue14d'    # pacman
+i_mail='\ue072'    # mail icon
+i_wifi='\ue0f0'    # signal
+i_time='\ue016'    # clock
+i_load='\ue0c5'    # micro chip
+i_musk='\ue04d '   # headphones
+i_alsa='\ue05d'    # speaker
+i_tmp='\ue0cf'     # thermometer 
+i_term='\ue01e'    # term
 i_monitor='\ue09f' # monitor 
 i_ecrcl='\ue0f6'
 i_fcrcl='\ue098'
@@ -33,6 +33,14 @@ SKULL=`echo -e '\u2620'`
 while :; do
     clk=`date "+%a %b. %e, %Y - %I:%M %p"`
     now_playing=`mpc current`
+    currVolume=`awk -F"[][]" '/dB/ { print $2 }' <(amixer sget Master)`
+    mute=`awk -F"[][]" '/dB/ { print $6 }' <(amixer sget Master)`
+    if [ "$mute" == "on" ]; then
+       volume=$currVolume
+    else
+       volume="OFF"
+    fi
+
     buf=" "
     buf="${buf}%{A:google-chrome "www.gmail.com" &:} ${MAILIC} Mail%{A} | "
     buf="${buf}%{A:google-chrome "www.google.com/calendar" &:}${CALIC} Calendar%{A} | "
@@ -40,9 +48,10 @@ while :; do
     buf="${buf}%{A:gnome-control-center.real sound &:}${SOUNDIC} Sound%{A} | "
     buf="${buf}%{A:gnome-control-center.real bluetooth &:}${WIFIIC} BT%{A} | "
     buf="${buf}%{c}%{A:gmpc &:}${MUSIC} ${now_playing}%{A}%{c}"
-    buf="${buf}%{r}${CLKIC} ${clk}%{r}"
+    buf="${buf}%{r}${SOUNDIC}   ${volume}% | "
+    buf="${buf}${CLKIC} ${clk}%{r}"
+
 
     echo $buf
-    # use `nowplaying scroll` to get a scrolling output!
-    sleep 1 # The HUD will be updated every second
+    sleep .1 # The HUD will be updated every .1 seconds
 done
