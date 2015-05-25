@@ -29,10 +29,11 @@ MAILIC=`echo -e $i_mail`
 CALIC=`echo -e $i_cal`
 WIFIIC=`echo -e $i_wifi`
 SKULL=`echo -e '\u2620'`
+BAT=`echo -e $i_tmp`
 
 while :; do
     clk=`date "+%a %b. %e, %Y - %I:%M %p"`
-    now_playing=`mpc current`
+    now_playing=`~/Public/scripts/spotify-now-playing.sh` #`mpc current`
     currVolume=`awk -F"[][]" '/dB/ { print $2 }' <(amixer sget Master)`
     mute=`awk -F"[][]" '/dB/ { print $6 }' <(amixer sget Master)`
     if [ "$mute" == "on" ]; then
@@ -41,17 +42,18 @@ while :; do
        volume="OFF"
     fi
 
+    battery=`awk -F"," '/%/ {print $2}' <(acpi -b)`
+
     buf=" "
     buf="${buf}%{A:google-chrome "www.gmail.com" &:} ${MAILIC} Mail%{A} | "
     buf="${buf}%{A:google-chrome "www.google.com/calendar" &:}${CALIC} Calendar%{A} | "
     buf="${buf}%{A:google-chrome "news.google.com" &:} ${TERMIC} News%{A} | "
     buf="${buf}%{A:gnome-control-center.real sound &:}${SOUNDIC} Sound%{A} | "
     buf="${buf}%{A:gnome-control-center.real bluetooth &:}${WIFIIC} BT%{A} | "
-    buf="${buf}%{c}%{A:gmpc &:}${MUSIC} ${now_playing}%{A}%{c}"
-    buf="${buf}%{r}${SOUNDIC}   ${volume}% | "
+    buf="${buf}%{c}%{A:spotify &:}${MUSIC} ${now_playing}%{A}%{c}"
+    buf="${buf}%{r}${BAT} ${battery}% | "
+    buf="${buf}${SOUNDIC} ${volume}% | "
     buf="${buf}${CLKIC} ${clk}%{r}"
-
-
     echo $buf
-    sleep .1 # The HUD will be updated every .1 seconds
+    sleep .100 # The HUD will be updated every .5 seconds
 done
