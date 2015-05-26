@@ -48,11 +48,10 @@ while :; do
     buf="${buf}%{A:google-chrome "www.gmail.com" &:} ${MAILIC} Mail%{A} | "
     buf="${buf}%{A:google-chrome "www.google.com/calendar" &:}${CALIC} Calendar%{A} | "
     buf="${buf}%{A:google-chrome "news.google.com" &:} ${TERMIC} News%{A} | "
-    buf="${buf}%{A:gnome-control-center.real sound &:}${SOUNDIC} Sound%{A} | "
     buf="${buf}%{A:gnome-control-center.real bluetooth &:}${WIFIIC} BT%{A} | "
     buf="${buf}%{c}%{A:spotify &:}${MUSIC} ${now_playing}%{A}%{c}"
     buf="${buf}%{r}${BAT} ${battery}% | "
-    buf="${buf}${SOUNDIC} ${volume}% | "
+    buf="${buf}%{A:gnome-control-center.real sound &:}${SOUNDIC} ${volume}% %{A} | "
     buf="${buf}${CLKIC} ${clk}%{r}"
     echo $buf
     sleep .100 # The HUD will be updated every .5 seconds
